@@ -14,6 +14,7 @@ class TestDataInverse:
         self.x_test, self.y_test = self.time_stepped()
 
     def time_stepped(self):
+        '''Test sets does not need splitting, so they can be stepped directly'''
         steps = self.time_steps
         data = self.normalized_data
         x, y = list(), list()

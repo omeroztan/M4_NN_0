@@ -20,12 +20,14 @@ class DataPrep:
         # self.inversed = sc.inverse_transform(self.__data)
 
     def data(self):
+        '''Getting the data as a DataFtame from filepath'''
         path = self.csv_file_path
         data = pd.read_csv(path, sep=',', index_col=0)
         data = data.values
         return data
 
     def normalize(self):
+        '''Normalising the data after splitting them, so there is no information leak from future set'''
         train, validation = self.split()
         scaler = MinMaxScaler(feature_range=(0.001, 1))
         scaled_train = scaler.fit_transform(train)  # todo ask about this normalization step, using train on both sets
@@ -33,6 +35,7 @@ class DataPrep:
         return scaled_train, scaled_validation
 
     def split(self):
+        '''Splitting data to train and validation sets'''
         split_const = self.split_constant
         cut = int(split_const * len(self.data()))
         train = self.data()[:cut]
@@ -40,6 +43,7 @@ class DataPrep:
         return train, validation
 
     def time_steps_train(self):
+        '''Preparing the data to have a time_step fashion'''
         steps = self.time_steps
         data = self.__scaled_train
         x, y = list(), list()
@@ -51,6 +55,7 @@ class DataPrep:
         return np.array(x), np.array(y)
 
     def time_steps_validation(self):
+        '''Preparing Validation data'''
         steps = self.time_steps
         data = self.__scaled_validation
         x, y = list(), list()

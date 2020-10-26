@@ -31,7 +31,7 @@ for i in range(3):  # here size_daily etc. can be used but since it takes very l
 
     x_test, y_test = testing_data.x_test, testing_data.y_test
 
-    neural = neural_network.NeuralNetwork(input_shape=x_train.shape, param_list=2)  # only x_train.shape can be sent
+    neural = neural_network.NeuralNetwork(input_shape=x_train.shape, param_list=2)  # only x_train.shape is needed for now
 
     param = dict(epochs=[1000], batch_size=[16, 32, 64])
 

@@ -20,6 +20,7 @@ class NeuralNetwork:
         self.model = self.build_nn
 
     def build_nn(self):
+        '''This is where we plan our network,this method will be used in the KerasRegressor obj'''
         print("\n")  # put end-line here, so it looks a bit more diffused, easier to read on console
         model = Sequential()
         model.add(LSTM(8, input_shape=(self.LSTM_input_shape[1:]), activation='relu', return_sequences=True))
