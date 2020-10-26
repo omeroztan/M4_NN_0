@@ -16,8 +16,12 @@ size_yearly = 23000
 
 for i in range(3):  # here size_daily etc. can be used but since it takes very long, i use a smaller number for testing
 
-    path_train = f'/Users/mac/Desktop/Datasets/M4_Dataset/M4_train_set/Daily_Train/daily_train_{i}.csv'
-    path_test = f'/Users/mac/Desktop/Datasets/M4_Dataset/M4_test_set/Daily_Test/daily_test_{i}.csv'
+    # On my computer the paths are full, but on github this would not work. I add relative paths under
+    # path_train = f'/Users/mac/Desktop/Datasets/M4_Dataset/M4_train_set/Daily_Train/daily_train_{i}.csv'
+    # path_test = f'/Users/mac/Desktop/Datasets/M4_Dataset/M4_test_set/Daily_Test/daily_test_{i}.csv'
+
+    path_train = f'daily_train_{i}.csv'
+    path_test = f'daily_test_{i}.csv'
 
     timesteps = 3  # varied step size will be used
     training_dataframe = data_prep.DataPrep(csv_file_path=path_train, time_steps=timesteps, split_constant=0.9)
@@ -31,7 +35,7 @@ for i in range(3):  # here size_daily etc. can be used but since it takes very l
 
     x_test, y_test = testing_data.x_test, testing_data.y_test
 
-    neural = neural_network.NeuralNetwork(input_shape=x_train.shape, param_list=2)  # only x_train.shape is needed for now
+    neural = neural_network.NeuralNetwork(input_shape=x_train.shape, param_list=2)  # only x_train.shape needed for now
 
     param = dict(epochs=[1000], batch_size=[16, 32, 64])
 
@@ -39,7 +43,9 @@ for i in range(3):  # here size_daily etc. can be used but since it takes very l
 
     my_callbacks = EarlyStopping(monitor='val_loss', patience=10, verbose=0)
     searcher.grid.fit(x_train, y_train, validation_data=(x_validation, y_validation), callbacks=my_callbacks, verbose=0)
-    print(searcher.grid.cv_results_['mean_test_score'], searcher.grid.cv_results_['std_test_score'], searcher.grid.cv_results_['params'])
+    print(searcher.grid.cv_results_['mean_test_score'],
+          searcher.grid.cv_results_['std_test_score'],
+          searcher.grid.cv_results_['params'])
 
     print(searcher.grid.score(x_test, y_test))
 
