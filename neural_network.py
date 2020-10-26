@@ -4,6 +4,7 @@ from tensorflow.keras.models import Sequential
 
 
 class NeuralNetwork:
+    """This class encapsulates the mechanism of building a neural architecture"""
     def __init__(self, input_shape, param_list):
         # i wasn't sure whether to send a list of parameters, or send them piece by piece in variables
 
@@ -20,7 +21,7 @@ class NeuralNetwork:
         self.model = self.build_nn
 
     def build_nn(self):
-        '''This is where we plan our network,this method will be used in the KerasRegressor obj'''
+        """This is where we plan our network,this method will be used in the KerasRegressor obj"""
         print("\n")  # put end-line here, so it looks a bit more diffused, easier to read on console
         model = Sequential()
         model.add(LSTM(8, input_shape=(self.LSTM_input_shape[1:]), activation='relu', return_sequences=True))

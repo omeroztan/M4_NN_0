@@ -5,6 +5,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 
 
 class Regres:
+    """Where we use our KerasRegressor Object"""
     def __init__(self, model,  parameters):
         self.parameters = parameters
         self.model = model

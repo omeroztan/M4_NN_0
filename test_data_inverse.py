@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 class TestDataInverse:
+    """Inverse Transforming at the end of prediciton, so we can compare real valuesn not normalised ones."""
     def __init__(self, csv_file_path, timesteps):
         self.data = pd.read_csv(csv_file_path, sep=',', index_col=0)
         self.time_steps = timesteps
@@ -14,7 +15,7 @@ class TestDataInverse:
         self.x_test, self.y_test = self.time_stepped()
 
     def time_stepped(self):
-        '''Test sets does not need splitting, so they can be stepped directly'''
+        """Test sets does not need splitting, so they can be stepped directly"""
         steps = self.time_steps
         data = self.normalized_data
         x, y = list(), list()

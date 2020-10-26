@@ -3,6 +3,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
 class DataPrep:
+    """Data Preparation Class, I want to use an instance of this class to get the data network needs"""
     def __init__(self, csv_file_path, time_steps, split_constant):
         self.csv_file_path = csv_file_path
         self.time_steps = time_steps
@@ -20,14 +21,14 @@ class DataPrep:
         # self.inversed = sc.inverse_transform(self.__data)
 
     def data(self):
-        '''Getting the data as a DataFtame from filepath'''
+        """Getting the data as a DataFrame from file path"""
         path = self.csv_file_path
         data = pd.read_csv(path, sep=',', index_col=0)
         data = data.values
         return data
 
     def normalize(self):
-        '''Normalising the data after splitting them, so there is no information leak from future set'''
+        """Normalising the data after splitting them, so there is no information leak from future set"""
         train, validation = self.split()
         scaler = MinMaxScaler(feature_range=(0.001, 1))
         scaled_train = scaler.fit_transform(train)  # todo ask about this normalization step, using train on both sets
@@ -35,7 +36,7 @@ class DataPrep:
         return scaled_train, scaled_validation
 
     def split(self):
-        '''Splitting data to train and validation sets'''
+        """Splitting data to train and validation sets"""
         split_const = self.split_constant
         cut = int(split_const * len(self.data()))
         train = self.data()[:cut]
@@ -43,7 +44,7 @@ class DataPrep:
         return train, validation
 
     def time_steps_train(self):
-        '''Preparing the data to have a time_step fashion'''
+        """Preparing the data to have a time_step fashion"""
         steps = self.time_steps
         data = self.__scaled_train
         x, y = list(), list()
@@ -55,7 +56,7 @@ class DataPrep:
         return np.array(x), np.array(y)
 
     def time_steps_validation(self):
-        '''Preparing Validation data'''
+        """Preparing Validation data"""
         steps = self.time_steps
         data = self.__scaled_validation
         x, y = list(), list()
