@@ -9,9 +9,9 @@ class DataPrep:
         self.time_steps = time_steps
         self.split_constant = split_constant
 
-        self.__train, self.__validation = self.split()  # a bit confusion woth train, validation. I do not call them??
+        self.train, self.validation = self.split()  # a bit confusion with train, validation. I do not call them??
         self.__scaled_train, self.__scaled_validation = self.normalize()
-        self.__data = self.data()
+        self.data = self.data()
 
         self.x_train, self.y_train = self.time_steps_train()
         self.x_validation, self.y_validation = self.time_steps_validation()

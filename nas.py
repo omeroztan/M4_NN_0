@@ -14,6 +14,7 @@ class Regres:
 
     def do(self):
         regressor = KerasRegressor(build_fn=self.model)
+
         grid = GridSearchCV(regressor, param_grid=self.parameters, cv=2)  # i need to solve this cv issue
         # my_callbacks = EarlyStopping(monitor='mse', patience=10, verbose=2)
         return grid
