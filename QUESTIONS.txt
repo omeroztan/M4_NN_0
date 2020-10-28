@@ -1,0 +1,13 @@
+
+
+In this document I will add my problems, issues and questions, just like a note taking app, so i do not forget to ask them. Content can change with time.
+
+1-) "WARNING:tensorflow:5 out of the last 5 calls to <function Model.make_predict_function.<locals>.predict_function at 0x13d3c9e50> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/tutorials/customization/performance#python_or_tensor_args and https://www.tensorflow.org/api_docs/python/tf/function for  more details."
+
+
+This is due to calling the fit function(?) many times in the for loop. I don't know any way to solve this issue, code works but shows a warning
+
+2-) It seems my model is always under predicting, so prediction number is smaller than actual y value. 
+I believe this is because it gives a smaller error percantage, is there a way to mitigate this issue. Or is it an issue, maybe it is quite normal??
+
+3-) 
